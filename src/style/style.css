@@ -1,0 +1,75 @@
+body{
+    margin: 0;
+}
+/* menu */
+.menu{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: space-around;
+    min-height: 100vh;
+    min-width: 100vw;
+    background : paleturquoise ;
+}
+.main-section{
+    display : flex ;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+.left-section{
+    display: flex;
+    flex-direction: column;
+}
+.play{
+    width: fit-content;
+    cursor: pointer;
+    padding: 10px 50px;
+    border-radius : 5px ;
+    background-color: mediumseagreen;
+}
+.play:hover{
+    background-color: rgba(60, 179, 114, 0.863);
+}
+/*playground*/
+.chart{
+  
+}
+.playground-main{
+    display : flex;
+    flex-direction:column ;
+    align-items: center;
+}
+.buy-sell{
+    width: 100%;
+    display : flex;
+    justify-content: space-around;
+}
+.btn{
+    border-radius: 5px;
+    padding  : 5px 0 ;
+    cursor: pointer;
+    width : 120px;
+    text-align: center;
+}
+.btn:hover{
+    filter: brightness(0.95)
+}
+.sell-btn{
+background-color: gold;
+}
+.buy-btn{
+background-color:deepskyblue;
+}
+.return-btn{
+    background-color:orangered;  
+}
+.transparent{
+    background-color:transparent;
+}
+.red{
+    background-color:crimson;
+}
+.green{
+    background-color:forestgreen;
+}

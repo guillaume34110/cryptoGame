@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import{
+  BrowserRouter,
+Routes,
+Route,
+HashRouter,
+} from "react-router-dom";
+import Menu from './composants/Pages/Menu';
+import Playground from './composants/Pages/Playground';
+import './style/style.css'
 
-function App() {
+export const Switch = () => {
+  const [stateDatas , setStateDatas] = useState({playerMonney : 1000 ,cryptoUnit : 'bitcoin'}) //state data array for entire application
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+      <Routes>
+        <Route path="/" element={<Menu stateDatas={stateDatas} setStateDatas ={setStateDatas} />} />
+        <Route path="/playground" element={<Playground  stateDatas={stateDatas} setStateDatas ={setStateDatas}  />} />
+      </Routes>
+      </>
+  )
+};
+function App() {
+  
+  return (
+    <HashRouter>
+      <Switch />
+    </HashRouter>
   );
 }
 
 export default App;
+
+
