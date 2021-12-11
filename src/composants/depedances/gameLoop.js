@@ -1,14 +1,15 @@
 
 import { chartUpdate } from "./chartConfig"
 
+
 export const generateNewDatasAndUpdateChart = (currentData, data, dynamicValues) => {
-    if (document.querySelector('.playground-main')) {
+    
         for (let i = dynamicValues.index; i < (500 + dynamicValues.index); i++) {
             currentData.push(data[i])
         }
         currentData.slice(dynamicValues.index, 500 + dynamicValues.index)
         chartUpdate(currentData, dynamicValues.tickPriceData)
-    }
+    
 }
 
 export const updateCurrentPrice = (currentData, setCurrentPrice, dynamicValues) => {

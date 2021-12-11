@@ -2,6 +2,7 @@
 import Chart from "chart.js/auto"
 
  let cryptoChart
+ export let yAxisD = {display : true}
 export const chart = (data,tickPriceData) => {
     if (cryptoChart )cryptoChart.destroy();
     let dataLabel = []
@@ -29,6 +30,7 @@ export const chart = (data,tickPriceData) => {
                 },
 
                 yAxis: {
+                    display: yAxisD.display,
                     min:
                         dataMin
                     ,
@@ -94,14 +96,14 @@ export const chart = (data,tickPriceData) => {
                 tooltip: false,
                 data: data,
                 label: "crytpo",
-                borderColor: "#3e95cd",
+                borderColor: "#6d8700",
                 fill: false,
                 yAxisID: 'yAxis',
             },{
                 tooltip: false,
                 data: referenceLine,
                 label: "crytpo2",
-                borderColor: "red",
+                borderColor: "#54001a",
                 fill: false,
                 yAxisID: 'yAxis1',
             }]
@@ -112,7 +114,8 @@ export const chart = (data,tickPriceData) => {
 }
 export const chartUpdate = (newData,dynamicCurrentPrice) => {
     if (cryptoChart.data) {
-        cryptoChart.destroy();
+  
+        //cryptoChart.destroy();
         chart(newData,dynamicCurrentPrice)
     }
 }

@@ -1,9 +1,15 @@
 import React, { useEffect,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cryptolist } from '../../data/CryptoList';
+import { chart, chartDestroy, yAxisD } from '../depedances/chartConfig';
+import { generateNewDatasAndUpdateChart, updateCurrentPrice, updateTickPrice } from '../depedances/gameLoop';
+import { showFile } from '../depedances/txtToObject';
 
 let startSoft = false
+let dynamicValues  = { fee: 0.00004, currentPrice: 0, index: 0, sellShort: 'Buy Short', longSell: 'Buy Long', orderPrice: 0, tickPriceData: 0, playerCrypto: 0, playerCurrentFee: 0, playerMonney: 0, cryptoUnit: 'btc' }
 const Menu = ({stateDatas , setStateDatas}) => { 
+    const [cryptoDatas, setCryptoDatas] = useState()
+    const [graphDisplay ,setGraphDisplay] = useState({width:600,height:600})
     const navigate = useNavigate()
     const selectCrypto = (e) => {
         setStateDatas({playerMonney : stateDatas.playerMonney ,cryptoUnit : e.target.value})
@@ -13,6 +19,8 @@ const Menu = ({stateDatas , setStateDatas}) => {
   }
 useEffect(() => {
     let playerMonney = 0
+    graphheightandWidth()
+    yAxisD.display = false
     if (!startSoft){
         startSoft = true
         console.log(window.localStorage)
@@ -30,8 +38,41 @@ if (playerMonney === 0) {
     setStateDatas({playerMonney : 1000 ,cryptoUnit : stateDatas.cryptoUnit})
     window.localStorage.setItem('myWallet',1000)
 }
-}, [])
+dynamicValues.index = 0
 
+    showFile(setCryptoDatas,'bitcoin')
+
+}, [])
+const graphheightandWidth = () => {
+    setGraphDisplay({width: window.innerWidth , height:window.innerHeight})
+}
+useEffect(() => {
+     if (cryptoDatas) {
+    let bufferDatas = []
+    for (let i = 0; i < 500; i++) {
+        bufferDatas.push(cryptoDatas[i])
+    }
+    dynamicValues.index = 0
+    
+    chart(bufferDatas, dynamicValues.currentPrice)
+    loopControler()
+}
+},[cryptoDatas])
+
+const loopControler = () => {
+    const interval = setInterval(() => {
+        if (!document.querySelector('.menu')) {
+            chartDestroy()
+            clearInterval(interval)
+        }
+        let currentData = []
+        dynamicValues.index++
+        updateTickPrice(dynamicValues)
+        generateNewDatasAndUpdateChart(currentData, cryptoDatas, dynamicValues)
+        
+    }, 200)
+    return () => clearInterval(interval);
+}
     return (
         <div className = "menu">
              <h1>CryptoGame</h1>
@@ -52,7 +93,9 @@ if (playerMonney === 0) {
         </div>
         </div>
         <div className = "play" onClick ={playGame}><p>Play</p></div>
-
+        <div className="menu-chart">
+                <canvas id="line-chart" width={graphDisplay.width+"px"} height={graphDisplay.height +"px"}></canvas>
+            </div>
         </div>
     );
 }

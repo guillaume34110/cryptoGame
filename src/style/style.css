@@ -1,5 +1,12 @@
 body{
     margin: 0;
+    background :#202700 ;
+    color : whitesmoke;
+    height :100%;
+}
+#root{
+    height: 100%;
+    min-height:100vh;
 }
 /* menu */
 .menu{
@@ -7,15 +14,16 @@ body{
     flex-direction:column;
     align-items:center;
     justify-content: space-around;
-    min-height: 100vh;
+    height: 100vh;
     min-width: 100vw;
-    background : paleturquoise ;
+   
 }
 .main-section{
     display : flex ;
     align-items: center;
     justify-content: space-around;
     width: 100%;
+   
 }
 .left-section{
     display: flex;
@@ -26,10 +34,18 @@ body{
     cursor: pointer;
     padding: 10px 50px;
     border-radius : 5px ;
-    background-color: mediumseagreen;
+    background-color: #005439;
+   
 }
 .play:hover{
-    background-color: rgba(60, 179, 114, 0.863);
+    filter : brightness(1.08);
+}
+.menu-chart{
+position: absolute;
+z-index: -1;
+}
+section{
+    width: 100%;
 }
 /*playground*/
 .chart{
@@ -39,6 +55,16 @@ body{
     display : flex;
     flex-direction:column ;
     align-items: center;
+    justify-content: space-between;
+    height : 100%;
+    min-height: 94vh;
+    padding : 3vh 0 ;
+}
+.playground-top{
+    display : flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
 }
 .buy-sell{
     width: 100%;
@@ -53,16 +79,16 @@ body{
     text-align: center;
 }
 .btn:hover{
-    filter: brightness(0.95)
+    filter: brightness(1.08)
 }
 .sell-btn{
-background-color: gold;
+background-color: #445400;
 }
 .buy-btn{
-background-color:deepskyblue;
+background-color:#100054;
 }
 .return-btn{
-    background-color:orangered;  
+    background-color:#54001a;  
 }
 .transparent{
     background-color:transparent;
@@ -71,5 +97,5 @@ background-color:deepskyblue;
     background-color:crimson;
 }
 .green{
-    background-color:forestgreen;
+    background-color:#005439;
 }

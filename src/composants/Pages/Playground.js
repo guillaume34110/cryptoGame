@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { chart, chartDestroy } from '../depedances/chartConfig';
+import { chart, chartDestroy, yAxisD } from '../depedances/chartConfig';
 import { endGame, generateNewDatasAndUpdateChart, updateCurrentPrice, updateFlag, updateGain, updateTickPrice } from '../depedances/gameLoop';
 import { showFile } from '../depedances/txtToObject';
 
 
-let dynamicValues = { fee: 0.004, currentPrice: 0, index: 0, sellShort: 'Buy Short', longSell: 'Buy Long', orderPrice: 0, tickPriceData: 0, playerCrypto: 0, playerCurrentFee: 0, playerMonney: 0, cryptoUnit: 'btc' }
+let dynamicValues = { fee: 0.00004, currentPrice: 0, index: 0, sellShort: 'Buy Short', longSell: 'Buy Long', orderPrice: 0, tickPriceData: 0, playerCrypto: 0, playerCurrentFee: 0, playerMonney: 0, cryptoUnit: 'btc' }
 const Playground = ({ stateDatas, setStateDatas }) => {
     const [cryptoDatas, setCryptoDatas] = useState()
     const [playerMonney, setPlayerMonney] = useState(0)
@@ -18,12 +18,19 @@ const Playground = ({ stateDatas, setStateDatas }) => {
     const [orderPrice, setOrderPrice] = useState(0)
     const [gain, setGain] = useState(0)
     const [drawIndex, setDrawIndex] = useState(0)
+    const [graphDisplay ,setGraphDisplay] = useState({width:600,height:600})
     const navigate = useNavigate()
     useEffect(() => {
+        yAxisD.display = true
+        graphheightandWidth()
         showFile(setCryptoDatas,stateDatas.cryptoUnit)
     }, [])
+    const graphheightandWidth = () => {
+        setGraphDisplay({width: window.innerWidth , height:(window.innerHeight/1.6)})
+    }
     useEffect(() => {
         if (cryptoDatas) {
+            
             let bufferDatas = []
             for (let i = 0; i < 500; i++) {
                 bufferDatas.push(cryptoDatas[i])
@@ -47,12 +54,14 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             dynamicValues.index++
             setDrawIndex(dynamicValues.index)
             let currentData = []
+            if (document.querySelector('.playground-main')) {
             generateNewDatasAndUpdateChart(currentData, cryptoDatas, dynamicValues)
             updateCurrentPrice(currentData, setCurrentPrice, dynamicValues)
             updateTickPrice(dynamicValues)
             updateFlag(dynamicValues, setFlagColor)
             updateGain(setGain, dynamicValues)
-            if (dynamicValues.index >= 10000) {
+            }
+            if (dynamicValues.index >= 9500) {
                 endGame(setStateDatas, dynamicValues, navigate, interval)
             }
         }, 200)
@@ -74,7 +83,8 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             setOrderPrice(currentPrice)
             dynamicValues.orderPrice = currentPrice
         } else if (dynamicValues.playerMonney === 0 && playerCrypto < 0) {
-            dynamicValues.playerMonney = - (playerCrypto * currentPrice - (playerCrypto * currentPrice * dynamicValues.fee))
+        
+            dynamicValues.playerMonney = - ((playerCrypto * orderPrice) + ((playerCrypto * orderPrice) - (playerCrypto *  currentPrice)) ) + (playerCrypto * currentPrice  * dynamicValues.fee)
             setPlayerMonney(dynamicValues.playerMonney)
             setPlayerCrypto(0)
             dynamicValues.playerCrypto = 0
@@ -99,8 +109,8 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             setOrderPrice(0)
             dynamicValues.orderPrice = 0
         } else if (dynamicValues.playerMonney > 0 && playerCrypto === 0) {
-            dynamicValues.playerCurrentFee = (stateDatas.playerMonney * dynamicValues.fee)
-            const transactionResult = -(stateDatas.playerMonney - (stateDatas.playerMonney * dynamicValues.fee)) / currentPrice
+            dynamicValues.playerCurrentFee = (dynamicValues.playerMonney * dynamicValues.fee)
+            const transactionResult = -(dynamicValues.playerMonney - (dynamicValues.playerMonney * dynamicValues.fee)) / currentPrice
             setPlayerCrypto(transactionResult)
             dynamicValues.playerCrypto = transactionResult
             dynamicValues.playerMonney = 0
@@ -119,23 +129,23 @@ const Playground = ({ stateDatas, setStateDatas }) => {
     return (
         <main className=" playground-main">
             <section>
-                <div>
+                <div className="playground-top">
                     <h2 className="current-price">current price :{currentPrice}$</h2>
                     <h2 className={"order " + flagColor}  >Order at : {orderPrice}</h2>
                     <h2 className="gain" >Gain : {gain}$</h2>
                 </div>
-                <div>
+                <div className="playground-top">
                     <h2 className="user-money">monney : {playerMonney} $ / {playerCrypto} {stateDatas.cryptoUnit}</h2>
                     <h2> fee : 0.004% </h2>
-                    <h2 className="index">{drawIndex}/10000</h2>
+                    <h2 className="index">{drawIndex}/9500</h2>
                 </div>
             </section>
             <div className="chart">
-                <canvas id="line-chart" width="800" height="450"></canvas>
+                <canvas id="line-chart" width={graphDisplay.width+"px"} height={graphDisplay.height+"px"}></canvas>
             </div>
             <section className="buy-sell">
+            <div className="return-btn btn" onClick={returnMenu}>Menu</div>
                 <div className="sell-btn btn" onClick={longOrSell}>{longSell}</div>
-                <div className="return-btn btn" onClick={returnMenu}>Menu</div>
                 <div className="buy-btn btn" onClick={shortOrSell}>{sellShort}</div>
             </section>
         </main>
