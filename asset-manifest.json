@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/cryptoGame/static/css/main.be347fe9.chunk.css",
+    "main.js": "/cryptoGame/static/js/main.f6d50dca.chunk.js",
+    "main.js.map": "/cryptoGame/static/js/main.f6d50dca.chunk.js.map",
+    "runtime-main.js": "/cryptoGame/static/js/runtime-main.bd61c6fe.js",
+    "runtime-main.js.map": "/cryptoGame/static/js/runtime-main.bd61c6fe.js.map",
+    "static/js/2.7f34966f.chunk.js": "/cryptoGame/static/js/2.7f34966f.chunk.js",
+    "static/js/2.7f34966f.chunk.js.map": "/cryptoGame/static/js/2.7f34966f.chunk.js.map",
+    "static/js/3.a22a7f87.chunk.js": "/cryptoGame/static/js/3.a22a7f87.chunk.js",
+    "static/js/3.a22a7f87.chunk.js.map": "/cryptoGame/static/js/3.a22a7f87.chunk.js.map",
+    "index.html": "/cryptoGame/index.html",
+    "static/css/main.be347fe9.chunk.css.map": "/cryptoGame/static/css/main.be347fe9.chunk.css.map",
+    "static/js/2.7f34966f.chunk.js.LICENSE.txt": "/cryptoGame/static/js/2.7f34966f.chunk.js.LICENSE.txt",
+    "static/media/BTC.82585eb7.txt": "/cryptoGame/static/media/BTC.82585eb7.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bd61c6fe.js",
+    "static/js/2.7f34966f.chunk.js",
+    "static/css/main.be347fe9.chunk.css",
+    "static/js/main.f6d50dca.chunk.js"
+  ]
+}
