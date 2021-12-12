@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { chart, chartDestroy, yAxisD } from '../depedances/chartConfig';
+import { chart, chartDestroy, paddingChart, yAxisD } from '../depedances/chartConfig';
 import { endGame, generateNewDatasAndUpdateChart, updateCurrentPrice, updateFlag, updateGain, updateTickPrice } from '../depedances/gameLoop';
 import { showFile } from '../depedances/txtToObject';
 
@@ -19,14 +19,17 @@ const Playground = ({ stateDatas, setStateDatas }) => {
     const [gain, setGain] = useState(0)
     const [drawIndex, setDrawIndex] = useState(0)
     const [graphDisplay ,setGraphDisplay] = useState({width:600,height:600})
+    const startButtonRef = useRef() 
+    const chartRef = useRef()
     const navigate = useNavigate()
     useEffect(() => {
         yAxisD.display = true
+        paddingChart.right = 120
         graphheightandWidth()
         showFile(setCryptoDatas,stateDatas.cryptoUnit)
     }, [])
     const graphheightandWidth = () => {
-        setGraphDisplay({width: window.innerWidth , height:(window.innerHeight/1.6)})
+        setGraphDisplay({width: window.innerWidth*0.94  , height:(window.innerHeight/1.6)})
     }
     useEffect(() => {
         if (cryptoDatas) {
@@ -38,13 +41,21 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             dynamicValues.index = 0
             setDrawIndex(0)
             updateCurrentPrice(bufferDatas, setCurrentPrice, dynamicValues)
+            chartRef.current.classList.remove('hide')
             chart(bufferDatas, dynamicValues.currentPrice)
             dynamicValues.playerMonney = stateDatas.playerMonney
             dynamicValues.cryptoUnit = stateDatas.cryptoUnit
-            setPlayerMonney(stateDatas.playerMonney)
-            loopControler()
+            formatPlayerMonney(stateDatas.playerMonney)
+            
         }
     }, [cryptoDatas])
+    const startLoop = () => {
+        startButtonRef.current.classList.add("hide")
+        loopControler()
+    }
+    const formatPlayerMonney = (playerMonney) => {
+        setPlayerMonney((Math.round(playerMonney * 100)) / 100)
+    }
     const loopControler = () => {
         const interval = setInterval(() => {
             if (!document.querySelector('.playground-main')) {
@@ -75,7 +86,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             setPlayerCrypto(transactionResult)
             dynamicValues.playerCrypto = transactionResult
             dynamicValues.playerMonney = 0
-            setPlayerMonney(0)
+            formatPlayerMonney(0)
             setSellShort('Sell')
             dynamicValues.sellShort = 'Sell'
             setLongSell('')
@@ -85,7 +96,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
         } else if (dynamicValues.playerMonney === 0 && playerCrypto < 0) {
         
             dynamicValues.playerMonney = - ((playerCrypto * orderPrice) + ((playerCrypto * orderPrice) - (playerCrypto *  currentPrice)) ) + (playerCrypto * currentPrice  * dynamicValues.fee)
-            setPlayerMonney(dynamicValues.playerMonney)
+            formatPlayerMonney(dynamicValues.playerMonney)
             setPlayerCrypto(0)
             dynamicValues.playerCrypto = 0
             setSellShort('Buy Short')
@@ -99,7 +110,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
     const shortOrSell = () => {
         if (dynamicValues.playerMonney === 0 && playerCrypto > 0) {
             dynamicValues.playerMonney = playerCrypto * currentPrice - ((playerCrypto * currentPrice) * dynamicValues.fee)
-            setPlayerMonney(dynamicValues.playerMonney)
+            formatPlayerMonney(dynamicValues.playerMonney)
             setPlayerCrypto(0)
             dynamicValues.playerCrypto = 0
             setSellShort('Buy Short')
@@ -114,7 +125,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             setPlayerCrypto(transactionResult)
             dynamicValues.playerCrypto = transactionResult
             dynamicValues.playerMonney = 0
-            setPlayerMonney(0)
+            formatPlayerMonney(0)
             setSellShort('')
             dynamicValues.sellShort = ''
             setLongSell('Sell')
@@ -137,15 +148,16 @@ const Playground = ({ stateDatas, setStateDatas }) => {
                 <div className="playground-top">
                     <h2 className="user-money">monney : {playerMonney} $ / {playerCrypto} {stateDatas.cryptoUnit}</h2>
                     <h2> fee : 0.004% </h2>
-                    <h2 className="index">{drawIndex}/9500</h2>
-                </div>
+                    <div className="playground-index-menu"><h2 className="index">{drawIndex}/9500  </h2><div className="return-btn btn" onClick={returnMenu}>Menu</div>
+                </div></div>
             </section>
-            <div className="chart">
+            <div className="chart hide playground-chart" ref = {chartRef}>
                 <canvas id="line-chart" width={graphDisplay.width+"px"} height={graphDisplay.height+"px"}></canvas>
             </div>
             <section className="buy-sell">
-            <div className="return-btn btn" onClick={returnMenu}>Menu</div>
-                <div className="sell-btn btn" onClick={longOrSell}>{longSell}</div>
+            
+                <div  className="sell-btn btn" onClick={longOrSell}>{longSell}</div>
+                <div ref ={startButtonRef} className ="start-btn btn" onClick={startLoop}> Start </div>
                 <div className="buy-btn btn" onClick={shortOrSell}>{sellShort}</div>
             </section>
         </main>

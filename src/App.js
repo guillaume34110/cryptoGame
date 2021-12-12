@@ -10,7 +10,7 @@ import Playground from './composants/Pages/Playground';
 import './style/style.css'
 
 export const Switch = () => {
-  const [stateDatas , setStateDatas] = useState({playerMonney : 1000 ,cryptoUnit : 'bitcoin'}) //state data array for entire application
+  const [stateDatas , setStateDatas] = useState({playerMonney : 1000 ,cryptoUnit : 'Bitcoin'}) //state data array for entire application
   return (
       <>
       <Routes>

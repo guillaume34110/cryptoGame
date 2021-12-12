@@ -66,3 +66,6 @@ export const endGame = async (setStateDatas, dynamicValues, navigate, interval) 
     if (interval)clearInterval(interval)
     navigate('/')
 }
+export const menuLoopChart = (dynamicValues) => {
+if (dynamicValues.index === 9400) dynamicValues.index = 0
+}

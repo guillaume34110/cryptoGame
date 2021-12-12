@@ -1,13 +1,12 @@
-
 import Chart from "chart.js/auto"
 
- let cryptoChart
- export let yAxisD = {display : true}
-export const chart = (data,tickPriceData) => {
-    if (cryptoChart )cryptoChart.destroy();
+let cryptoChart
+export let yAxisD = { display: true }
+export let paddingChart = {right : 120}
+export const chart = (data, tickPriceData) => {
+    if (cryptoChart) cryptoChart.destroy();
     let dataLabel = []
     let referenceLine = []
-
     for (let i = 0; i < data.length; i++) {
         dataLabel.push(i)
         referenceLine.push(tickPriceData)
@@ -18,29 +17,29 @@ export const chart = (data,tickPriceData) => {
     cryptoChart = new Chart(document.getElementById("line-chart"), {
         type: 'line',
         options: {
+            
             animation: false,
             pointBorderWidth: 0,
             pointRadius: 0,
             hoverBorderWidth: 0,
             hoverRadius: 0,
+            layout:{
+                padding: {
+                    right: paddingChart.right,
+                }
+            },
             scales: {
-
                 xAxis: {
                     display: false,
                 },
-
                 yAxis: {
                     display: yAxisD.display,
-                    min:
-                        dataMin
+                    min: dataMin
                     ,
-                    max:
-                        dataMax
+                    max: dataMax
                     ,
                     grid: {
                         drawBorder: false,
-
-
                     },
                     ticks: {
                         beginAtZero: false,
@@ -49,23 +48,17 @@ export const chart = (data,tickPriceData) => {
                         maxTicksLimit: 5,
                         padding: 25,
                     },
-
                 },
                 yAxis1: {
                     type: 'linear',
                     display: false,
                     position: 'right',
-            
-                    min:
-                        dataMin
+                    min: dataMin
                     ,
-                    max:
-                        dataMax
-                   ,
+                    max: dataMax
+                    ,
                     grid: {
                         drawBorder: false,
-
-
                     },
                     ticks: {
                         beginAtZero: false,
@@ -74,9 +67,7 @@ export const chart = (data,tickPriceData) => {
                         maxTicksLimit: 1,
                         padding: 25,
                     },
-
                 }
-
             },
             plugins: {
                 legend: {
@@ -86,7 +77,6 @@ export const chart = (data,tickPriceData) => {
                     display: false,
                     enabled: false,
                     mode: 'single',
-
                 },
             }
         },
@@ -99,7 +89,7 @@ export const chart = (data,tickPriceData) => {
                 borderColor: "#6d8700",
                 fill: false,
                 yAxisID: 'yAxis',
-            },{
+            }, {
                 tooltip: false,
                 data: referenceLine,
                 label: "crytpo2",
@@ -107,16 +97,14 @@ export const chart = (data,tickPriceData) => {
                 fill: false,
                 yAxisID: 'yAxis1',
             }]
-            
         },
-
     });
 }
-export const chartUpdate = (newData,dynamicCurrentPrice) => {
+export const chartUpdate = (newData, dynamicCurrentPrice) => {
     if (cryptoChart.data) {
-  
+
         //cryptoChart.destroy();
-        chart(newData,dynamicCurrentPrice)
+        chart(newData, dynamicCurrentPrice)
     }
 }
 export const chartDestroy = () => {

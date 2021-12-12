@@ -8,7 +8,7 @@ import XRP from '../../data/XRP.txt'
 export const showFile = async (setCryptoDatas, cryptoUnit) => {
   let cryptoData
   console.log(cryptoUnit)
-  if (cryptoUnit === 'bitcoin') cryptoData = BTC
+  if (cryptoUnit === 'Bitcoin') cryptoData = BTC
   else if (cryptoUnit === 'ADA') cryptoData = ADA
   else if (cryptoUnit === 'BNB') cryptoData = BNB
   else if (cryptoUnit === 'Ether') cryptoData = ETH
