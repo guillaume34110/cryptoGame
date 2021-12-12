@@ -24,7 +24,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
     const navigate = useNavigate()
     useEffect(() => {
         yAxisD.display = true
-        paddingChart.right = 120
+        paddingChart.right = 60
         graphheightandWidth()
         showFile(setCryptoDatas,stateDatas.cryptoUnit)
     }, [])

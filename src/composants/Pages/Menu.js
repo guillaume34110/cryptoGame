@@ -118,6 +118,7 @@ paddingChart.right = 0
                 })}
 </div>
             </div>
+            <p>10.000 radom data for the selected Crypto </p>
 
             <div className="menu-chart">
                 <canvas id="line-chart" width={graphDisplay.width + "px"} height={graphDisplay.height + "px"}></canvas>
