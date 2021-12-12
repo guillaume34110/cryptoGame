@@ -55,29 +55,26 @@ h1{
     width :64px;
     cursor: pointer;
     margin : 0 10px;
+    transition:1s;
 }
 .icons:hover{
-    filter : brightness(1.08)
+    filter : brightness(1.08);
+    transform:rotate(360deg);
 }
 .crypto-label{
     font-size:22px;
     font-weight:bold;
 }
 .Solana{
-    transform: scale(1.15);
+    transform:rotate(0deg) scale(1.15);
+  
 }
-.play{
-    width: fit-content;
-    cursor: pointer;
-    padding: 0px 50px;
-    border-radius : 5px ;
-    background-color: #445400;
-    font-size:22px;
-    font-weight:bold;
+.Solana:hover{
+    
+    filter : brightness(1.08) ;
+    transform: rotate(360deg) scale(1.15);
 }
-.play:hover{
-    filter : brightness(1.08);
-}
+
 .menu-chart{
     position: absolute;
     z-index: -1;
