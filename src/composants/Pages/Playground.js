@@ -5,6 +5,13 @@ import { chart, chartDestroy, paddingChart, yAxisD } from '../depedances/chartCo
 import { endGame, generateNewDatasAndUpdateChart, updateCurrentPrice, updateFlag, updateGain, updateTickPrice } from '../depedances/gameLoop';
 import { showFile } from '../depedances/txtToObject';
 
+import btcIcon from '../../assets/coin/bitcoin.png'
+import adaIcon from '../../assets/coin/ada.png'
+import ethIcon from '../../assets/coin/ethereum.png'
+import solanaIcon from '../../assets/coin/solana.png'
+import xrpIcon from '../../assets/coin/xrp.png'
+import bnbIcon from '../../assets/coin/binance.png'
+let icons = {Bitcoin : btcIcon,ADA : adaIcon,Ether : ethIcon,BNB : bnbIcon,Solana : solanaIcon,XRP : xrpIcon}
 
 let dynamicValues = { fee: 0.00004, currentPrice: 0, index: 0, sellShort: 'Buy Short', longSell: 'Buy Long', orderPrice: 0, tickPriceData: 0, playerCrypto: 0, playerCurrentFee: 0, playerMonney: 0, cryptoUnit: 'btc' }
 const Playground = ({ stateDatas, setStateDatas }) => {
@@ -19,14 +26,19 @@ const Playground = ({ stateDatas, setStateDatas }) => {
     const [gain, setGain] = useState(0)
     const [drawIndex, setDrawIndex] = useState(0)
     const [graphDisplay ,setGraphDisplay] = useState({width:600,height:600})
+    const [spinnerImage ,setSpinnerImage] = useState(icons[stateDatas.cryptoUnit])
     const startButtonRef = useRef() 
     const chartRef = useRef()
+    const spinnerRef = useRef()
+
     const navigate = useNavigate()
+
     useEffect(() => {
         yAxisD.display = true
         paddingChart.right = 60
         graphheightandWidth()
         showFile(setCryptoDatas,stateDatas.cryptoUnit)
+       
     }, [])
     const graphheightandWidth = () => {
         setGraphDisplay({width: window.innerWidth*0.94  , height:(window.innerHeight/1.6)})
@@ -41,6 +53,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             dynamicValues.index = 0
             setDrawIndex(0)
             updateCurrentPrice(bufferDatas, setCurrentPrice, dynamicValues)
+            spinnerRef.current.classList.add('hide')
             chartRef.current.classList.remove('hide')
             chart(bufferDatas, dynamicValues.currentPrice)
             dynamicValues.playerMonney = stateDatas.playerMonney
@@ -151,11 +164,15 @@ const Playground = ({ stateDatas, setStateDatas }) => {
                     <div className="playground-index-menu"><h2 className="index">{drawIndex}/9500  </h2><div className="return-btn btn" onClick={returnMenu}>Menu</div>
                 </div></div>
             </section>
+            <div className = "chart-spinner-contenair">
             <div className="chart hide playground-chart" ref = {chartRef}>
+                
                 <canvas id="line-chart" width={graphDisplay.width+"px"} height={graphDisplay.height+"px"}></canvas>
+            </div> 
+             <img className="spinner" ref ={spinnerRef} height='128px' width='128px' src={spinnerImage} alt = "spinner"/>
             </div>
             <section className="buy-sell">
-            
+          
                 <div  className="sell-btn btn" onClick={longOrSell}>{longSell}</div>
                 <div ref ={startButtonRef} className ="start-btn btn" onClick={startLoop}> Start </div>
                 <div className="buy-btn btn" onClick={shortOrSell}>{sellShort}</div>

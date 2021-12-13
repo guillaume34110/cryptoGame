@@ -110,8 +110,8 @@ paddingChart.right = 0
             <div className="crypto-select">
                 {cryptolist.map((crypto, index) => {
                     return (
-                        <div className="img-contenair">
-                            <img onMouseLeave={hideCryptoname} onMouseEnter={unhideCryptoname} onClick={playGame} data-icon={crypto} className={"icons " + crypto} key={index} src={icons[index]} alt={crypto} />
+                        <div key={index} className="img-contenair">
+                            <img onMouseLeave={hideCryptoname} onMouseEnter={unhideCryptoname} onClick={playGame} data-icon={crypto} className={"icons " + crypto}  src={icons[index]} alt={crypto} />
                             <p className={"name-" + crypto + " opa0"}>{crypto}</p>
                         </div>
                     )
