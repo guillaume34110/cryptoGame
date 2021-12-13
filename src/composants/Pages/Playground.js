@@ -12,7 +12,7 @@ import solanaIcon from '../../assets/coin/solana.png'
 import xrpIcon from '../../assets/coin/xrp.png'
 import bnbIcon from '../../assets/coin/binance.png'
 let icons = {Bitcoin : btcIcon,ADA : adaIcon,Ether : ethIcon,BNB : bnbIcon,Solana : solanaIcon,XRP : xrpIcon}
-
+let startSoft = false
 let dynamicValues = { fee: 0.00004, currentPrice: 0, index: 0, sellShort: 'Buy Short', longSell: 'Buy Long', orderPrice: 0, tickPriceData: 0, playerCrypto: 0, playerCurrentFee: 0, playerMonney: 0, cryptoUnit: 'btc' }
 const Playground = ({ stateDatas, setStateDatas }) => {
     const [cryptoDatas, setCryptoDatas] = useState()
@@ -34,6 +34,27 @@ const Playground = ({ stateDatas, setStateDatas }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        let playerMonneyBuffer = 0
+        if (!startSoft) {
+            startSoft = true
+            console.log(window.localStorage)
+            let localStorage = window.localStorage.getItem('myWallet')
+            if (!localStorage) window.localStorage.setItem('myWallet', stateDatas.playerMonney)
+            else {
+                setStateDatas({ playerMonney: localStorage, cryptoUnit: stateDatas.cryptoUnit })
+                playerMonneyBuffer = localStorage
+                formatPlayerMonney(localStorage)
+            }
+        } else {
+            window.localStorage.setItem('myWallet', stateDatas.playerMonney)
+            playerMonneyBuffer = stateDatas.playerMonney
+            formatPlayerMonney(stateDatas.playerMonney)
+        }
+        if (playerMonneyBuffer === 0) {
+            setStateDatas({ playerMonney: 1000, cryptoUnit: stateDatas.cryptoUnit })
+            window.localStorage.setItem('myWallet', 1000)
+            formatPlayerMonney(1000)
+        }
         yAxisD.display = true
         paddingChart.right = 60
         graphheightandWidth()
