@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cryptoGame/static/css/main.74205eb3.chunk.css",
-    "main.js": "/cryptoGame/static/js/main.ccde74d9.chunk.js",
-    "main.js.map": "/cryptoGame/static/js/main.ccde74d9.chunk.js.map",
+    "main.js": "/cryptoGame/static/js/main.801d4ad1.chunk.js",
+    "main.js.map": "/cryptoGame/static/js/main.801d4ad1.chunk.js.map",
     "runtime-main.js": "/cryptoGame/static/js/runtime-main.bd61c6fe.js",
     "runtime-main.js.map": "/cryptoGame/static/js/runtime-main.bd61c6fe.js.map",
     "static/js/2.de96202b.chunk.js": "/cryptoGame/static/js/2.de96202b.chunk.js",
@@ -25,6 +25,6 @@
     "static/js/runtime-main.bd61c6fe.js",
     "static/js/2.de96202b.chunk.js",
     "static/css/main.74205eb3.chunk.css",
-    "static/js/main.ccde74d9.chunk.js"
+    "static/js/main.801d4ad1.chunk.js"
   ]
 }
