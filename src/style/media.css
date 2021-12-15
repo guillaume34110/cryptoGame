@@ -1,0 +1,27 @@
+@media screen and (max-width: 900px) {
+   h1{
+       font-size:1.2em;
+   }
+   h2{
+       font-size:1em;
+       margin : 0;
+   }
+   p{
+       font-size: 0.8em;
+       margin : 0;
+   }
+   .crypto-label{
+    font-size: 0.8em;
+    margin-bottom: 3vh;
+   }
+   .icons{
+       height:32px ;
+       width: 32px;
+   }
+   .playground-top{
+       flex-wrap: wrap;
+   }
+   .buy-sell{
+    flex-wrap: wrap;
+   }
+  }

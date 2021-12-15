@@ -109,7 +109,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
             if (dynamicValues.index >= 9500) {
                 endGame(setStateDatas, dynamicValues, navigate, interval)
             }
-        }, 200)
+        }, 100)
         return () => clearInterval(interval);
     }
 

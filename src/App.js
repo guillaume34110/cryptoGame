@@ -8,6 +8,7 @@ HashRouter,
 import Menu from './composants/Pages/Menu';
 import Playground from './composants/Pages/Playground';
 import './style/style.css'
+import './style/media.css'
 
 export const Switch = () => {
   const [stateDatas , setStateDatas] = useState({playerMonney : 1000 ,cryptoUnit : 'Bitcoin'}) //state data array for entire application

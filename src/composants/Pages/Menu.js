@@ -57,6 +57,7 @@ paddingChart.right = 0
         setPlayerMonney((Math.round(playerMonney * 100)) / 100)
     }
     const graphheightandWidth = () => {
+        console.log(window.innerWidth,window.innerHeight)
         setGraphDisplay({ width: window.innerWidth, height: window.innerHeight })
     }
     useEffect(() => {
@@ -82,7 +83,7 @@ paddingChart.right = 0
             updateTickPrice(dynamicValues)
             menuLoopChart(dynamicValues)
             generateNewDatasAndUpdateChart(currentData, cryptoDatas, dynamicValues)
-        }, 200)
+        }, 100)
         return () => clearInterval(interval);
     }
     const unhideCryptoname = (e) => {
