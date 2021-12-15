@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/cryptoGame/static/css/main.2b66cdea.chunk.css",
-    "main.js": "/cryptoGame/static/js/main.0fb5bf4b.chunk.js",
-    "main.js.map": "/cryptoGame/static/js/main.0fb5bf4b.chunk.js.map",
+    "main.css": "/cryptoGame/static/css/main.52af1a3a.chunk.css",
+    "main.js": "/cryptoGame/static/js/main.02bd3462.chunk.js",
+    "main.js.map": "/cryptoGame/static/js/main.02bd3462.chunk.js.map",
     "runtime-main.js": "/cryptoGame/static/js/runtime-main.54221cb2.js",
     "runtime-main.js.map": "/cryptoGame/static/js/runtime-main.54221cb2.js.map",
     "static/js/2.de96202b.chunk.js": "/cryptoGame/static/js/2.de96202b.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.06a15d3a.chunk.js": "/cryptoGame/static/js/3.06a15d3a.chunk.js",
     "static/js/3.06a15d3a.chunk.js.map": "/cryptoGame/static/js/3.06a15d3a.chunk.js.map",
     "index.html": "/cryptoGame/index.html",
-    "static/css/main.2b66cdea.chunk.css.map": "/cryptoGame/static/css/main.2b66cdea.chunk.css.map",
+    "static/css/main.52af1a3a.chunk.css.map": "/cryptoGame/static/css/main.52af1a3a.chunk.css.map",
     "static/js/2.de96202b.chunk.js.LICENSE.txt": "/cryptoGame/static/js/2.de96202b.chunk.js.LICENSE.txt",
     "static/media/ADA.8e5834d5.txt": "/cryptoGame/static/media/ADA.8e5834d5.txt",
     "static/media/BNB.f42ca6e8.txt": "/cryptoGame/static/media/BNB.f42ca6e8.txt",
@@ -24,7 +24,7 @@
   "entrypoints": [
     "static/js/runtime-main.54221cb2.js",
     "static/js/2.de96202b.chunk.js",
-    "static/css/main.2b66cdea.chunk.css",
-    "static/js/main.0fb5bf4b.chunk.js"
+    "static/css/main.52af1a3a.chunk.css",
+    "static/js/main.02bd3462.chunk.js"
   ]
 }
