@@ -58,7 +58,7 @@ paddingChart.right = 0
     }
     const graphheightandWidth = () => {
         console.log(window.innerWidth,window.innerHeight)
-        setGraphDisplay({ width: window.innerWidth, height: window.innerHeight })
+        setGraphDisplay({ width: document.documentElement.clientWidth, height: document.documentElement.clientHeight })
     }
     useEffect(() => {
         if (cryptoDatas) {

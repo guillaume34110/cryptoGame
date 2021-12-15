@@ -62,7 +62,7 @@ const Playground = ({ stateDatas, setStateDatas }) => {
        
     }, [])
     const graphheightandWidth = () => {
-        setGraphDisplay({width: window.innerWidth*0.94  , height:(window.innerHeight/1.6)})
+        setGraphDisplay({width: document.documentElement.clientWidth*0.94  , height:(document.documentElement.clientHeight/1.6)})
     }
     useEffect(() => {
         if (cryptoDatas) {

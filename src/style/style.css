@@ -9,7 +9,7 @@ body{
     justify-content: center;
     align-items: center;
     font-family: 'Readex Pro', sans-serif;
-    overflow: hidden;
+    
 }
 #root{
     height: 100%;
